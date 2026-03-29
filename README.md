@@ -1,6 +1,8 @@
-# (_TODO: fill in the title of this assignment here!_)
+# Huffman Trees
 
-Authors: (_TODO: fill in your names here!_)
+Authors: 
+Risa Takemoto
+El Houston
 
 ## Build commands
 
@@ -10,6 +12,4 @@ Authors: (_TODO: fill in your names here!_)
 
 ## Resources
 
-*   (_TODO: fill in resources here!_)
-*   ...
-*   ...
+*   Project page: https://osera.cs.grinnell.edu/ttap/data-structures-labs/decompression.html#implementation

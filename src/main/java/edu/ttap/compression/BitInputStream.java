@@ -17,7 +17,11 @@ public class BitInputStream {
      * @param file the file to open
      */
     public BitInputStream(String file) throws IOException {
-        input = new FileInputStream(file);
+        try {
+            input = new FileInputStream(file);
+        } catch (IOException e) {
+            throw new FileNotFoundException(e.toString());
+        }
         nextByte();
     }
 

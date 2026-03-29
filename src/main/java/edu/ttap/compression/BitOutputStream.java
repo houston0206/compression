@@ -21,7 +21,11 @@ public class BitOutputStream {
      * @throws FileNotFoundException if the file is not found
      */
     public BitOutputStream(String file, boolean debug) throws IOException {
-        this.output = new PrintStream(file);
+        try {
+            this.output = new PrintStream(file);
+        } catch (IOException e) {
+            throw new FileNotFoundException(e.toString());
+        }
         this.debug = debug;
         digits = 0;
         cursor = BYTE_SIZE - 1;

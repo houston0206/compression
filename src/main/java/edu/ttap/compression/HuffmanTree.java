@@ -15,11 +15,65 @@ package edu.ttap.compression;
 public class HuffmanTree {
 
     /**
+     * A node of the binary tree.
+     */
+    public static class Node {
+        public short leafValue;
+        public Node left;
+        public Node right;
+
+        /**
+         * @param value the value of the node
+         * @param left the left child of the node
+         * @param right the right child of the node
+         */
+        Node(short value, Node left, Node right) {
+            this.leafValue = value;
+            this.left = left;
+            this.right = right;
+        }
+
+        /**
+         * Constructs a leaf node
+         * @param value the value of the node
+         */
+        Node(short value) {
+            this(value, null, null);
+        }
+
+        /**
+         * Constructs an interior node
+         * @param left the left child of the node
+         * @param right the right child of the node
+         */
+        Node(Node left, Node right) {
+            this((short)0, left, right);
+        }
+    }
+
+    private Node root;
+
+    public void huffmanHelper(BitInputStream in, Node node) {
+        int bit = in.readBit();
+        if (bit == 0) {
+            short newCh = (short)in.readBits(9);                
+            node = new Node(newCh);
+        } if (bit == 1) {
+            huffmanHelper(in, node.left);
+            huffmanHelper(in, node.right);
+        }
+    }
+
+    /**
      * Constructs a new HuffmanTree from the given file.
      * @param in the input file (as a BitInputStream)
      */
     public HuffmanTree(BitInputStream in) {
-        // TODO: fill me in!
+        int bit = in.readBit();
+        if (bit == 1) {
+            huffmanHelper(in, root.left);
+            huffmanHelper(in, root.right);
+        }
     }
 
     /**
@@ -31,6 +85,21 @@ public class HuffmanTree {
      * @param out the file to write the decompressed output to.
      */
     public void decode(BitInputStream in, BitOutputStream out) {
-        // TODO: fill me in!
+        Node node = root;
+        while (in.hasBits()) {
+            int bit = in.readBit();
+            if (bit == 0)
+                node = node.left;
+            if (bit == 1)
+                node = node.right;
+            if (node.left == null && node.right == null) {
+                if(node.leafValue==256) {
+                    break;
+                } else { 
+                    out.writeBits(node.leafValue, 9);
+                    node = root;
+                }
+            }
+        }
     }
 }
