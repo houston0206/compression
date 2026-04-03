@@ -25,7 +25,7 @@ public class BitInputStream {
         nextByte();
     }
 
-    /** @return true iff the stream has bits left to produce */
+    /** @return true if the stream has bits left to produce */
     public boolean hasBits() {
         return digits != -1;
     }

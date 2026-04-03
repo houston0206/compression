@@ -38,7 +38,7 @@ public class HuffmanTree {
          * @param value the value of the node
          */
         Node(short value) {
-            this(value, null, null);
+            this.leafValue = value;
         }
 
         /**
@@ -47,20 +47,29 @@ public class HuffmanTree {
          * @param right the right child of the node
          */
         Node(Node left, Node right) {
-            this((short)0, left, right);
+            this.left = left;
+            this.right = right;
         }
     }
 
     private Node root;
 
-    public void huffmanHelper(BitInputStream in, Node node) {
+    /**
+     * Constructs a new HuffmanTree from the given file.
+     * @param in the input file (as a BitInputStream)
+     */
+    private Node huffmanHelper(BitInputStream in) {
         int bit = in.readBit();
+        if (bit == -1) {
+            throw new IllegalStateException("Unexpected end of input");
+        }
         if (bit == 0) {
-            short newCh = (short)in.readBits(9);                
-            node = new Node(newCh);
-        } if (bit == 1) {
-            huffmanHelper(in, node.left);
-            huffmanHelper(in, node.right);
+            int newCh = in.readBits(9);     
+            return new Node((short)newCh);
+        } else {
+            Node newLeft = huffmanHelper(in);
+            Node newRight = huffmanHelper(in);
+            return new Node(newLeft, newRight);
         }
     }
 
@@ -69,11 +78,7 @@ public class HuffmanTree {
      * @param in the input file (as a BitInputStream)
      */
     public HuffmanTree(BitInputStream in) {
-        int bit = in.readBit();
-        if (bit == 1) {
-            huffmanHelper(in, root.left);
-            huffmanHelper(in, root.right);
-        }
+        this.root = huffmanHelper(in);
     }
 
     /**
@@ -93,10 +98,10 @@ public class HuffmanTree {
             if (bit == 1)
                 node = node.right;
             if (node.left == null && node.right == null) {
-                if(node.leafValue==256) {
+                if(node.leafValue == 256) {
                     break;
                 } else { 
-                    out.writeBits(node.leafValue, 9);
+                    out.writeBits(node.leafValue, 8);
                     node = root;
                 }
             }
