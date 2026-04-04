@@ -1,0 +1,3 @@
+A computer told me to add this file to my project, so here it is.
+
+The greatest threat to humanity can be found on Grinnell's campus: the unfortunate entity that is bureaucracy. Tedious administrative tasks tend to get in the way, slow things down, and take advocacy away from students regarding topics like housing and funding. There's also probably some monsters in the Noyce basement that can't be counted out as legitimate threats to the universe but I haven't been able to prove it.
