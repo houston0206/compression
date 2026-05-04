@@ -3,13 +3,18 @@ package edu.ttap.trees;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A basic tree class
+ */
 public class Tree<T> {
     /**
      * A node of the binary tree.
      */
     public static class Node<T> {
         public T value;
+
         public Node<T> left;
+        
         public Node<T> right;
 
         /**
@@ -226,8 +231,8 @@ public class Tree<T> {
             buf.append("-");
             buf.append(node.value);
             buf.append("\n");
-            toPrettyH(node.left, buf, indent+1);
-            toPrettyH(node.right, buf, indent+1);
+            toPrettyH(node.left, buf, indent + 1);
+            toPrettyH(node.right, buf, indent + 1);
         }
     }
 

@@ -19,7 +19,9 @@ public class HuffmanTree {
      */
     public static class Node {
         public short leafValue;
+
         public Node left;
+
         public Node right;
 
         /**
@@ -57,6 +59,7 @@ public class HuffmanTree {
     /**
      * Constructs a new HuffmanTree from the given file.
      * @param in the input file (as a BitInputStream)
+     * @return a new HuffmanTree
      */
     private Node huffmanHelper(BitInputStream in) {
         int bit = in.readBit();
@@ -65,7 +68,7 @@ public class HuffmanTree {
         }
         if (bit == 0) {
             int newCh = in.readBits(9);     
-            return new Node((short)newCh);
+            return new Node((short) newCh);
         } else {
             Node newLeft = huffmanHelper(in);
             Node newRight = huffmanHelper(in);
@@ -93,12 +96,14 @@ public class HuffmanTree {
         Node node = root;
         while (in.hasBits()) {
             int bit = in.readBit();
-            if (bit == 0)
+            if (bit == 0) {
                 node = node.left;
-            if (bit == 1)
+            }
+            if (bit == 1) {
                 node = node.right;
+            }
             if (node.left == null && node.right == null) {
-                if(node.leafValue == 256) {
+                if (node.leafValue == 256) {
                     break;
                 } else { 
                     out.writeBits(node.leafValue, 8);

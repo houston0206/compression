@@ -15,7 +15,9 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      */
     private static class Node<T> {
         public T value;
+
         public Node<T> left;
+        
         public Node<T> right;
 
         /**
@@ -70,6 +72,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     /**
      * @param node the binary search tree
      * @param v    the value to insert
+     * @return the node that was inserted
      */
     private Node<T> insertH(Node<T> node, T v) {
         if (node == null) {
@@ -98,6 +101,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     /**
      * @param node the binary search tree
      * @param v    the value to insert
+     * @return a boolean determining if the BST contains the given value
      */
     private boolean containH(Node<T> node, T v) {
         if (node == null) {
@@ -127,6 +131,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 
     /**
      * @param node the binary search tree
+     * @return the string representation of the node
      */
     private String toStringH(Node<T> node) {
         if (node == null) {
@@ -209,6 +214,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * so that it'll be the alternative of the deleted node
      *
      * @param node the node to check
+     * @return the minimum value
      */
     private T findMin(Node<T> node) {
         if (node.left == null) {
@@ -220,6 +226,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     /**
      * @param node the node to delete
      * @param v the value we are looking for
+     * @return the deleted node, or null if it didn't exist
      */
     private Node<T> deleteH(Node<T> node, T v) {
         if (node == null) {

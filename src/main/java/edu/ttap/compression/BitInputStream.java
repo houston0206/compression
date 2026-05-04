@@ -6,8 +6,11 @@ import java.io.*;
  * A BitInputStream reads a file bit-by-bit.
  */
 public class BitInputStream {
+
     private FileInputStream input;
+
     private int digits;     // next set of digits (buffer)
+    
     private int cursor;     // how many digits from buffer have been used
 
     private static final int BYTE_SIZE = 8;  // digits per byte

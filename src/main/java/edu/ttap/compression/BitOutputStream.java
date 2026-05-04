@@ -7,8 +7,11 @@ import java.io.*;
  */
 public class BitOutputStream {
     private PrintStream output;
+
     private int digits;     // a buffer used to build up next set of digits
+
     private int cursor;     // our current position in the buffer.
+    
     private boolean debug;  // set to true to write ASCII 0s and 1s rather than
                             // bits
 
